@@ -1,0 +1,304 @@
+/* ===== Reset & Base Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Calibri', 'Segoe UI', Arial, sans-serif;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+/* ===== Resume Container ===== */
+.resume-container {
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 40px 50px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+/* ===== Header Section ===== */
+.header {
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #2c3e50;
+    margin-bottom: 20px;
+}
+
+.name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2c3e50;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.contact-info {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.contact-info a {
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+    color: #1abc9c;
+}
+
+.contact-info .separator {
+    margin: 0 6px;
+    color: #999;
+}
+
+/* ===== Sections ===== */
+.section {
+    margin-bottom: 22px;
+}
+
+.section-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom: 1.5px solid #2c3e50;
+    padding-bottom: 4px;
+    margin-bottom: 12px;
+}
+
+/* ===== Summary ===== */
+.summary {
+    font-size: 13.5px;
+    text-align: justify;
+    color: #444;
+    line-height: 1.6;
+}
+
+/* ===== Skills List ===== */
+.skills-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.skills-list li {
+    font-size: 13.5px;
+    margin-bottom: 5px;
+    color: #444;
+    line-height: 1.5;
+}
+
+.skills-list li strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* ===== Experience Section ===== */
+.experience-item {
+    margin-bottom: 18px;
+}
+
+.experience-item:last-child {
+    margin-bottom: 0;
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
+.role {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.duration {
+    font-size: 13px;
+    color: #666;
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* ===== Bullet List ===== */
+.bullet-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 4px;
+}
+
+.bullet-list li {
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #444;
+    line-height: 1.55;
+    text-align: justify;
+}
+
+/* ===== Projects Section ===== */
+.project-item {
+    margin-bottom: 16px;
+}
+
+.project-item:last-child {
+    margin-bottom: 0;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 2px;
+}
+
+.project-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.project-links {
+    font-size: 13px;
+    color: #666;
+}
+
+.project-links a {
+    color: #1abc9c;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.project-links a:hover {
+    text-decoration: underline;
+}
+
+.tech-stack {
+    font-size: 12.5px;
+    color: #777;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+/* ===== Education Section ===== */
+.education-item {
+    margin-bottom: 0;
+}
+
+.education-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 3px;
+}
+
+.degree {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.institution {
+    font-size: 13.5px;
+    color: #444;
+    margin-bottom: 4px;
+}
+
+.achievements {
+    font-size: 13px;
+    color: #555;
+    font-style: italic;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .resume-container {
+        padding: 25px 20px;
+    }
+
+    .name {
+        font-size: 22px;
+        letter-spacing: 1px;
+    }
+
+    .contact-info {
+        font-size: 12px;
+    }
+
+    .contact-info .separator {
+        display: none;
+    }
+
+    .contact-info span,
+    .contact-info a {
+        display: block;
+        margin: 2px 0;
+    }
+
+    .experience-header,
+    .project-header,
+    .education-header {
+        flex-direction: column;
+    }
+
+    .duration,
+    .project-links {
+        margin-top: 2px;
+    }
+
+    .section-title {
+        font-size: 14px;
+    }
+
+    .role,
+    .project-title,
+    .degree {
+        font-size: 13.5px;
+    }
+
+    .bullet-list li,
+    .skills-list li,
+    .summary {
+        font-size: 12.5px;
+    }
+}
+
+/* ===== Print Styles ===== */
+@media print {
+    body {
+        background-color: #ffffff;
+        padding: 0;
+    }
+
+    .resume-container {
+        box-shadow: none;
+        padding: 20px 30px;
+        max-width: 100%;
+    }
+
+    .section {
+        page-break-inside: avoid;
+    }
+
+    a {
+        color: #2c3e50 !important;
+        text-decoration: none !important;
+    }
+}
