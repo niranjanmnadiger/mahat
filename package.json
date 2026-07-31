@@ -1,0 +1,26 @@
+{
+  "name": "mahat",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niranjanmnadiger/mahat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/niranjanmnadiger/mahat/issues"
+  },
+  "homepage": "https://github.com/niranjanmnadiger/mahat#readme",
+  "description": "",
+  "dependencies": {
+    "auth": "^1.6.20",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.7.2"
+  }
+}
