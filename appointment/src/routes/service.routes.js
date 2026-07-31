@@ -1,41 +1,15 @@
-const mongoose = require("mongoose");
+const express = require("express");
 
-const serviceSchema = new mongoose.Schema(
-    {
-        name: {
-            type: String,
-            required: true,
-            trim: true,
-        },
+const {
+    createService,
+    getServices,
+    deleteService,
+} = require("../controllers/service.controller");
 
-        description: {
-            type: String,
-            trim: true,
-        },
+const router = express.Router();
 
-        price: {
-            type: Number,
-            required: true,
-            min: 0,
-        },
+router.post("/", createService);
+router.get("/", getServices);
+router.delete("/:id", deleteService);
 
-        durationMinutes: {
-            type: Number,
-            required: true,
-            min: 1,
-        },
-
-        providerId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Provider",
-            required: true,
-        },
-    },
-    {
-        timestamps: true,
-    }
-);
-
-const Service = mongoose.model("Service", serviceSchema);
-
-module.exports = Service;
+module.exports = router;
