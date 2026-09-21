@@ -26,4 +26,11 @@ console.log(y);
 console.log(x);
 console.log(x & y);
 
+30 - 11110
+16 8 4 2 1
+1  1 1 1 0
+1  0 1 0 0
+1  0  1 0 0 - 20
 
+    ? :
+    tobe: (val) => val === anotherVal ? true : "not equal"

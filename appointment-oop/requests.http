@@ -1,0 +1,98 @@
+### Appointment API - VS Code REST Client
+### Run these top to bottom. Ids from earlier responses feed later requests.
+
+@base = http://localhost:3000
+
+### Health check
+GET {{base}}/health
+
+### 1. Create a customer  (phone is normalised to 10 digits)
+# @name createCustomer
+POST {{base}}/customers
+Content-Type: application/json
+
+{ "name": "Gagan V", "phone": "+91 98765-43210", "email": "gagan@example.com" }
+
+### 2. Create a provider
+# @name createProvider
+POST {{base}}/providers
+Content-Type: application/json
+
+{ "name": "Dr Rao", "type": "Cardiology" }
+
+### 3. Create a service for that provider
+# @name createService
+POST {{base}}/services
+Content-Type: application/json
+
+{
+  "name": "Heart consultation",
+  "price": 800,
+  "durationMinutes": 30,
+  "providerId": "{{createProvider.response.body.data._id}}"
+}
+
+### 4. Book it. No endTime - it comes from durationMinutes.
+# @name createAppointment
+POST {{base}}/appointments
+Content-Type: application/json
+
+{
+  "customerId": "{{createCustomer.response.body.data._id}}",
+  "providerId": "{{createProvider.response.body.data._id}}",
+  "serviceId":  "{{createService.response.body.data._id}}",
+  "startTime":  "2026-12-01T04:30:00.000Z"
+}
+
+### 5. THE DEMO MOMENT: a second customer, overlapping start -> 409
+# Change the time to 05:00:00.000Z and it succeeds - back-to-back is allowed.
+POST {{base}}/appointments
+Content-Type: application/json
+
+{
+  "customerId": "{{createCustomer.response.body.data._id}}",
+  "providerId": "{{createProvider.response.body.data._id}}",
+  "serviceId":  "{{createService.response.body.data._id}}",
+  "startTime":  "2026-12-01T04:45:00.000Z"
+}
+
+### 6. endTime is rejected outright (strict body) -> 400
+POST {{base}}/appointments
+Content-Type: application/json
+
+{
+  "customerId": "{{createCustomer.response.body.data._id}}",
+  "providerId": "{{createProvider.response.body.data._id}}",
+  "serviceId":  "{{createService.response.body.data._id}}",
+  "startTime":  "2026-12-01T06:00:00.000Z",
+  "endTime":    "2026-12-01T09:00:00.000Z"
+}
+
+### 7. A timestamp with no timezone is rejected -> 400
+POST {{base}}/appointments
+Content-Type: application/json
+
+{
+  "customerId": "{{createCustomer.response.body.data._id}}",
+  "providerId": "{{createProvider.response.body.data._id}}",
+  "serviceId":  "{{createService.response.body.data._id}}",
+  "startTime":  "2026-12-01 10:00"
+}
+
+### 8. List with filters (strict: ?providerid= would be a 400)
+GET {{base}}/appointments?providerId={{createProvider.response.body.data._id}}&status=booked
+
+### 9. Reschedule (re-runs the clash check, ignoring itself)
+PATCH {{base}}/appointments/{{createAppointment.response.body.data._id}}/reschedule
+Content-Type: application/json
+
+{ "startTime": "2026-12-01T07:00:00.000Z" }
+
+### 10. Cancel, which frees the slot for a rebooking
+PATCH {{base}}/appointments/{{createAppointment.response.body.data._id}}/status
+Content-Type: application/json
+
+{ "status": "cancelled" }
+
+### 11. Deleting a provider with booked appointments is refused -> 400
+DELETE {{base}}/providers/{{createProvider.response.body.data._id}}

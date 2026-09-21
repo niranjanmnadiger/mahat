@@ -1,0 +1,22 @@
+{
+  "name": "appointment-booking-api",
+  "version": "1.0.0",
+  "description": "Appointment booking API with time slots, double-booking prevention and Zod validation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "node tests/run.js"
+  },
+  "keywords": ["express", "mongoose", "zod", "appointments"],
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

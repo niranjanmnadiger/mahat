@@ -54,8 +54,13 @@ async function createAppointment(data) {
         throw error;
     }
 
+    //check if there is a overlapping slot - the parameters should be the starting time and ending time 
+
+
     return appointmentRepository.create(data);
 }
+
+
 
 function getAppointments() {
     return appointmentRepository.findAll();

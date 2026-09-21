@@ -1,12 +1,12 @@
 require("dotenv").config();
 
 const express = require("express");
-const connectDB = require("./config/db");
+const connectDB = require("./src/config/db");
 
-const customerRoutes = require("./routes/customer.routes");
-const providerRoutes = require("./routes/provider.routes");
-const serviceRoutes = require("./routes/service.routes");
-const appointmentRoutes = require("./routes/appointment.routes");
+const customerRoutes = require("./src/routes/customer.routes");
+const providerRoutes = require("./src/routes/provider.routes");
+const serviceRoutes = require("./src/routes/service.routes");
+const appointmentRoutes = require("./src/routes/appointment.routes");
 
 const app = express();
 

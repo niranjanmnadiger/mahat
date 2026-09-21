@@ -1,0 +1,107 @@
+### Quick manual test flow (VS Code "REST Client" extension, or copy into Postman)
+@base = http://localhost:3000
+
+### 0. health
+GET {{base}}/health
+
+### 1. create a customer
+POST {{base}}/customers
+Content-Type: application/json
+
+{ "name": "Gagan", "phone": "9876543210", "email": "gagan@example.com" }
+
+### 2. create a second customer
+POST {{base}}/customers
+Content-Type: application/json
+
+{ "name": "Niranjan", "phone": "9876543211" }
+
+### 3. create a provider
+POST {{base}}/providers
+Content-Type: application/json
+
+{ "name": "Dr Rao", "type": "cardio", "phone": "9800000000" }
+
+### 4. create a 30 minute service  (paste the provider id)
+POST {{base}}/services
+Content-Type: application/json
+
+{
+  "name": "Heart Consultation",
+  "description": "General cardiac consultation",
+  "price": 800,
+  "durationMinutes": 30,
+  "providerId": "PASTE_PROVIDER_ID"
+}
+
+### 5. book 10:00 - endTime is derived as 10:30
+POST {{base}}/appointments
+Content-Type: application/json
+
+{
+  "customerId": "PASTE_CUSTOMER_1_ID",
+  "providerId": "PASTE_PROVIDER_ID",
+  "serviceId":  "PASTE_SERVICE_ID",
+  "startTime":  "2026-09-01T10:00:00.000Z"
+}
+
+### 6. CONFLICT: another customer, same provider, overlapping 10:15 -> expect 409
+POST {{base}}/appointments
+Content-Type: application/json
+
+{
+  "customerId": "PASTE_CUSTOMER_2_ID",
+  "providerId": "PASTE_PROVIDER_ID",
+  "serviceId":  "PASTE_SERVICE_ID",
+  "startTime":  "2026-09-01T10:15:00.000Z"
+}
+
+### 7. ALLOWED: back-to-back at 10:30 -> expect 201
+POST {{base}}/appointments
+Content-Type: application/json
+
+{
+  "customerId": "PASTE_CUSTOMER_2_ID",
+  "providerId": "PASTE_PROVIDER_ID",
+  "serviceId":  "PASTE_SERVICE_ID",
+  "startTime":  "2026-09-01T10:30:00.000Z"
+}
+
+### 8. explicit endTime for a longer visit
+POST {{base}}/appointments
+Content-Type: application/json
+
+{
+  "customerId": "PASTE_CUSTOMER_1_ID",
+  "providerId": "PASTE_PROVIDER_ID",
+  "serviceId":  "PASTE_SERVICE_ID",
+  "startTime":  "2026-09-01T15:00:00.000Z",
+  "endTime":    "2026-09-01T16:30:00.000Z"
+}
+
+### 9. VALIDATION: bad id + bad date + unknown key -> expect 400 with a field list
+POST {{base}}/appointments
+Content-Type: application/json
+
+{
+  "customerId": "not-an-id",
+  "providerId": "PASTE_PROVIDER_ID",
+  "serviceId":  "PASTE_SERVICE_ID",
+  "startTime":  "tomorrow morning",
+  "appointmentDate": "2026-09-01T10:00:00.000Z"
+}
+
+### 10. list a provider's day
+GET {{base}}/appointments?providerId=PASTE_PROVIDER_ID&from=2026-09-01T00:00:00.000Z&to=2026-09-01T23:59:59.000Z
+
+### 11. reschedule (conflict checks run again, ignoring its own slot)
+PATCH {{base}}/appointments/PASTE_APPOINTMENT_ID/reschedule
+Content-Type: application/json
+
+{ "startTime": "2026-09-01T12:00:00.000Z" }
+
+### 12. cancel - this frees the slot for someone else
+PATCH {{base}}/appointments/PASTE_APPOINTMENT_ID/status
+Content-Type: application/json
+
+{ "status": "cancelled" }

@@ -1,0 +1,181 @@
+/* Plain CSS, no framework. */
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 15px;
+  color: #1c2b36;
+  background: #f4f6f7;
+}
+
+.header {
+  padding: 16px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #d5dde1;
+}
+
+.header h1 {
+  margin: 0 0 12px;
+  font-size: 20px;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  color: #4a5c68;
+  text-decoration: none;
+  font-weight: 500;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav a:hover {
+  color: #1c2b36;
+}
+
+/* react-router adds class "active" to the NavLink of the current page. */
+.nav a.active {
+  color: #16697a;
+  border-bottom-color: #16697a;
+}
+
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+h2 {
+  margin: 0 0 16px;
+  font-size: 22px;
+}
+
+/* Forms */
+
+.form {
+  display: grid;
+  gap: 12px;
+  max-width: 420px;
+  margin-bottom: 28px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #d5dde1;
+  border-radius: 8px;
+}
+
+.form label {
+  display: grid;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px 10px;
+  font: inherit;
+  font-weight: 400;
+  border: 1px solid #c4ced4;
+  border-radius: 5px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+button,
+.button-link {
+  padding: 8px 14px;
+  font: inherit;
+  font-weight: 600;
+  color: #ffffff;
+  background: #16697a;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button:hover,
+.button-link:hover {
+  background: #11505d;
+}
+
+/* Keep the row buttons on one line. */
+.table td:last-child {
+  white-space: nowrap;
+}
+
+/* The small buttons inside table rows. */
+.table button {
+  margin-right: 6px;
+  padding: 4px 10px;
+  font-size: 13px;
+  background: #5b6f7c;
+}
+
+.table button:hover {
+  background: #44545e;
+}
+
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.toolbar label {
+  display: grid;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.toolbar select {
+  width: auto;
+}
+
+/* Tables */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #d5dde1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e6ebed;
+}
+
+.table th {
+  font-size: 13px;
+  color: #4a5c68;
+  background: #fafbfb;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Messages */
+
+.error {
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  color: #7a2318;
+  background: #fbeae7;
+  border-left: 4px solid #b3402f;
+  border-radius: 4px;
+}
